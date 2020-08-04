@@ -6,6 +6,7 @@ import androidx.core.content.res.ResourcesCompat;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
@@ -15,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     Chronometer chronometer;
     ImageButton startBtn, stopBtn;
 
-    private boolean isActive;
+    private boolean isActive, isRest;
     Handler handler;
     long timeMilliSecond, timeStart, timeStop, timeBuffer, timeUpdate =0L;
     int minute, second, millisecond;
@@ -38,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
                     handler.postDelayed(runnable, 0);
                     chronometer.start();
                     isActive = true;
-                    stopBtn.setVisibility(View.GONE);
+                    isRest = false;
+//                    stopBtn.setVisibility(View.GONE);
 //                    startBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_pause_24));
                     startBtn.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
                             R.drawable.ic_baseline_pause_24, null));
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                     handler.removeCallbacks(runnable);
                     chronometer.stop();
                     isActive = false;
-                    stopBtn.setVisibility(View.VISIBLE);
+//                    stopBtn.setVisibility(View.VISIBLE);
                     startBtn.setImageDrawable(ResourcesCompat.getDrawable(
                             getResources(), R.drawable.ic_baseline_play_arrow_24, null));
                 }
@@ -64,6 +66,18 @@ public class MainActivity extends AppCompatActivity {
                     timeBuffer = timeMilliSecond = timeStart = timeUpdate = 0L;
                     minute = second = millisecond = 0;
                     chronometer.setText("00:00:00");
+                }
+                else if (!isRest) {
+                    timeBuffer += timeMilliSecond;
+                    handler.removeCallbacks(runnable);
+                    chronometer.stop();
+                    timeBuffer = timeMilliSecond = timeStart = timeUpdate = 0L;
+                    minute = second = millisecond = 0;
+                    chronometer.setText("00:00:00");
+                    isActive = false;
+//                    stopBtn.setVisibility(View.VISIBLE);
+                    startBtn.setImageDrawable(ResourcesCompat.getDrawable(
+                            getResources(), R.drawable.ic_baseline_play_arrow_24, null));
                 }
             }
         });
