@@ -17,7 +17,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     Chronometer chronometer;
-    ImageButton startBtn, stopBtn, saveBtn;
+    ImageButton startBtn, stopBtn, saveBtn, recListBtn;
     List<String> list;
     ;
 
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         startBtn = findViewById(R.id.btnStart);
         stopBtn = findViewById(R.id.btnStop);
         saveBtn = findViewById(R.id.btnSave);
+        recListBtn = findViewById(R.id.btnRecList);
 
         list = new ArrayList<String>();
 
@@ -98,6 +99,15 @@ public class MainActivity extends AppCompatActivity {
                 }
                 list.add(String.format("%02d", minute) + ":" + String.format("%02d", second)
                         + ":" + String.format("%02d", millisecond));
+            }
+        });
+
+        recListBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for (String l : list) {
+                    Log.d("TAG", "list: " + l);
+                }
             }
         });
     }
