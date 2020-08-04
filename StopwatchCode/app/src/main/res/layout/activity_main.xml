@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_gravity="center"
+
     android:gravity="center"
     android:background="@android:color/darker_gray"
     tools:context=".MainActivity">
@@ -37,15 +37,24 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btnStart"
+            android:id="@+id/btnStop"
+            android:layout_marginRight="40dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_baseline_play_arrow_24" />
+            android:src="@drawable/ic_baseline_stop_24" />
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btnStop"
+            android:id="@+id/btnStart"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_baseline_stop_24" />
+            android:src="@drawable/ic_baseline_play_circle_filled_40" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnSave"
+            android:layout_marginLeft="40dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_baseline_save_24" />
+
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

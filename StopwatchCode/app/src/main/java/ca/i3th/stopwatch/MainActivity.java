@@ -11,10 +11,15 @@ import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     Chronometer chronometer;
-    ImageButton startBtn, stopBtn;
+    ImageButton startBtn, stopBtn, saveBtn;
+    List<String> list;
+    ;
 
     private boolean isActive, isRest;
     Handler handler;
@@ -28,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
         chronometer = findViewById(R.id.chronometer);
         startBtn = findViewById(R.id.btnStart);
         stopBtn = findViewById(R.id.btnStop);
+        saveBtn = findViewById(R.id.btnSave);
+
+        list = new ArrayList<String>();
 
         handler = new Handler();
 
@@ -43,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 //                    stopBtn.setVisibility(View.GONE);
 //                    startBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_pause_24));
                     startBtn.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
-                            R.drawable.ic_baseline_pause_24, null));
+                            R.drawable.ic_baseline_pause_circle_filled_24, null));
                 }
                 else  {
                     timeBuffer += timeMilliSecond;
@@ -52,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     isActive = false;
 //                    stopBtn.setVisibility(View.VISIBLE);
                     startBtn.setImageDrawable(ResourcesCompat.getDrawable(
-                            getResources(), R.drawable.ic_baseline_play_arrow_24, null));
+                            getResources(), R.drawable.ic_baseline_play_circle_filled_40, null));
                 }
             }
         });
@@ -62,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (!isActive) {
                     startBtn.setImageDrawable(ResourcesCompat.getDrawable(
-                            getResources(), R.drawable.ic_baseline_play_arrow_24, null));
+                            getResources(), R.drawable.ic_baseline_play_circle_filled_40, null));
                     timeBuffer = timeMilliSecond = timeStart = timeUpdate = 0L;
                     minute = second = millisecond = 0;
                     chronometer.setText("00:00:00");
@@ -77,8 +85,19 @@ public class MainActivity extends AppCompatActivity {
                     isActive = false;
 //                    stopBtn.setVisibility(View.VISIBLE);
                     startBtn.setImageDrawable(ResourcesCompat.getDrawable(
-                            getResources(), R.drawable.ic_baseline_play_arrow_24, null));
+                            getResources(), R.drawable.ic_baseline_play_circle_filled_40, null));
                 }
+            }
+        });
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (list.size() > 9) {
+                    list.clear();
+                }
+                list.add(String.format("%02d", minute) + ":" + String.format("%02d", second)
+                        + ":" + String.format("%02d", millisecond));
             }
         });
     }
