@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
@@ -82,20 +83,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openDialog(String list) {
+        View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.records_list, null);
         AlertDialog alertDialog = new AlertDialog.Builder(this)
-                //set icon
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                //set title
-                .setTitle(R.string.records)
-                //set message
-                .setMessage(list)
 
-                //set negative button
-                .setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.records)
+                .setMessage(list)
+                .setView(view)
+                .setNegativeButton("Done", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        //set what should happen when negative button is clicked
-                        Toast.makeText(getApplicationContext(),"Nothing Happened",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"The last 10 records ONLY display!",Toast.LENGTH_SHORT).show();
                     }
                 })
                 .show();
