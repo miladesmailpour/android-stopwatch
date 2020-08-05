@@ -1,5 +1,7 @@
 package ca.i3th.stopwatch;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
@@ -55,9 +57,14 @@ public class Stopwatch {
         }
     }
 
-    public void recordList() {
-        for (String l : list)
-            Log.d("TAG", "list: " + l);
+    public String recordList() {
+        String str = "";
+        int i = 1;
+        for (String l : list) {
+            str += "Record #" + String.valueOf(i) + " : " + l + '\n';
+            i++;
+        }
+        return str;
     }
 
     public boolean saveRecord() {
