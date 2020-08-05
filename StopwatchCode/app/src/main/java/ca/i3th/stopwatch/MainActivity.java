@@ -19,12 +19,10 @@ public class MainActivity extends AppCompatActivity {
     Chronometer chronometer;
     ImageButton startBtn, stopBtn, saveBtn, recListBtn;
     List<String> list;
-    ;
 
-    private boolean isActive, isRest;
     Handler handler;
-    long timeMilliSecond, timeStart, timeStop, timeBuffer, timeUpdate =0L;
-    int minute, second, millisecond;
+    private Stopwatch stopwatch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,90 +38,45 @@ public class MainActivity extends AppCompatActivity {
 
         handler = new Handler();
 
+        stopwatch = new Stopwatch(chronometer,handler);
+
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!isActive){
-                    timeStart = SystemClock.uptimeMillis();
-                    handler.postDelayed(runnable, 0);
-                    chronometer.start();
-                    isActive = true;
-                    isRest = false;
-//                    stopBtn.setVisibility(View.GONE);
-//                    startBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_pause_24));
-                    startBtn.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
-                            R.drawable.ic_baseline_pause_circle_filled_24, null));
-                }
-                else  {
-                    timeBuffer += timeMilliSecond;
-                    handler.removeCallbacks(runnable);
-                    chronometer.stop();
-                    isActive = false;
-//                    stopBtn.setVisibility(View.VISIBLE);
-                    startBtn.setImageDrawable(ResourcesCompat.getDrawable(
-                            getResources(), R.drawable.ic_baseline_play_circle_filled_40, null));
-                }
+                setBtn(1);
+                stopwatch.startTime();
             }
         });
 
         stopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!isActive) {
-                    startBtn.setImageDrawable(ResourcesCompat.getDrawable(
-                            getResources(), R.drawable.ic_baseline_play_circle_filled_40, null));
-                    timeBuffer = timeMilliSecond = timeStart = timeUpdate = 0L;
-                    minute = second = millisecond = 0;
-                    chronometer.setText("00:00:00");
-                }
-                else if (!isRest) {
-                    timeBuffer += timeMilliSecond;
-                    handler.removeCallbacks(runnable);
-                    chronometer.stop();
-                    timeBuffer = timeMilliSecond = timeStart = timeUpdate = 0L;
-                    minute = second = millisecond = 0;
-                    chronometer.setText("00:00:00");
-                    isActive = false;
-//                    stopBtn.setVisibility(View.VISIBLE);
-                    startBtn.setImageDrawable(ResourcesCompat.getDrawable(
-                            getResources(), R.drawable.ic_baseline_play_circle_filled_40, null));
-                }
+                setBtn(2);
+                stopwatch.stopTime();
             }
         });
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (list.size() > 9) {
-                    list.clear();
-                }
-                list.add(String.format("%02d", minute) + ":" + String.format("%02d", second)
-                        + ":" + String.format("%02d", millisecond));
+                stopwatch.saveRecord();
             }
         });
 
         recListBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for (String l : list) {
-                    Log.d("TAG", "list: " + l);
-                }
+                stopwatch.recordList();
             }
         });
     }
 
-    public Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            timeMilliSecond = SystemClock.uptimeMillis() - timeStart;
-            timeUpdate = timeBuffer + timeMilliSecond;
-            second = (int) (timeUpdate / 1000);
-            minute = second / 60;
-            second = second % 60;
-            millisecond = (int) (timeUpdate % 100);
-            chronometer.setText(String.format("%02d", minute) + ":" + String.format("%02d", second)
-                    + ":" + String.format("%02d", millisecond));
-            handler.postDelayed(this, 60);
-        }
-    };
+    private void setBtn(int option) {
+        if (option == 1)
+            startBtn.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
+                    R.drawable.ic_baseline_pause_circle_filled_24, null));
+        if (option == 2)
+            startBtn.setImageDrawable(ResourcesCompat.getDrawable(
+                    getResources(), R.drawable.ic_baseline_play_circle_filled_40, null));
+    }
 }
