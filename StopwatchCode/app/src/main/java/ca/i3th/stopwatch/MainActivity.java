@@ -1,9 +1,11 @@
 package ca.i3th.stopwatch;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.core.content.res.ResourcesCompat;
 
 import android.app.AlertDialog;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -23,6 +25,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        LinearLayoutCompat linearLayoutCompat = findViewById(R.id.main_layout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) linearLayoutCompat.getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.start();
 
         chronometer = findViewById(R.id.chronometer);
         startBtn = findViewById(R.id.btnStart);
