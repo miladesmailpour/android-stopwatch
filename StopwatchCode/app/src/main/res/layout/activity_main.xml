@@ -17,8 +17,9 @@
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:background="@drawable/bg"
-        android:orientation="vertical">
+        android:background="@drawable/blue_gradient_list"
+        android:orientation="vertical"
+        android:id="@+id/round_area">
 
         <Chronometer
             android:layout_width="wrap_content"

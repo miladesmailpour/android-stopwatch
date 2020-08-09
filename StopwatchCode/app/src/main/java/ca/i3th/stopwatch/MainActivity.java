@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     private Handler handler;
     private Stopwatch stopwatch;
     private AlertDialog alertDialog;
+    private AnimationDrawable animateRoundBlue;
+    private boolean checkAnimate = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();
+
+        LinearLayoutCompat roundLinear = findViewById(R.id.round_area);
+        animateRoundBlue = (AnimationDrawable) roundLinear.getBackground();
+        animateRoundBlue.setEnterFadeDuration(250);
+        animateRoundBlue.setExitFadeDuration(500);
 
         chronometer = findViewById(R.id.chronometer);
         startBtn = findViewById(R.id.btnStart);
@@ -45,6 +52,14 @@ public class MainActivity extends AppCompatActivity {
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (!checkAnimate) {
+                    animateRoundBlue.start();
+                    checkAnimate = true;
+            }
+                else {
+                    animateRoundBlue.stop();
+                    checkAnimate = false;
+                }
                 setBtn(1);
                 stopwatch.startTime();
             }
@@ -53,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
         stopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                animateRoundBlue.stop();
+                checkAnimate = false;
                 setBtn(2);
                 stopwatch.stopTime();
             }

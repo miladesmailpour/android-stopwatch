@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,8 +34,6 @@ public class RL extends DialogFragment {
 
         if (rec == null || rec.isEmpty()) {
             contextMag.setText("Empty!");
-            view.getLayoutParams().height = 100;
-            view.requestLayout();
         }
         else{
             contextMag.setText(rec);
@@ -44,6 +43,7 @@ public class RL extends DialogFragment {
         closeList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(getActivity(), "Last 10 records ONLY display!", Toast.LENGTH_SHORT).show();
                 getDialog().dismiss();
             }
         });
