@@ -67,11 +67,13 @@ public class Stopwatch {
         return str;
     }
 
-    public boolean saveRecord() {
+    public String saveRecord() {
         if (list.size() > 9)
             list.clear();
-        return list.add(String.format("%02d", minute) + ":" + String.format("%02d", second)
+        String lastR = (String.format("%02d", minute) + ":" + String.format("%02d", second)
                 + ":" + String.format("%02d", millisecond));
+        list.add(lastR);
+        return lastR;
     }
 
     private Runnable runnable = new Runnable() {

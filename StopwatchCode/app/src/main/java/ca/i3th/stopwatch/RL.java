@@ -2,6 +2,7 @@ package ca.i3th.stopwatch;
 
 
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,8 @@ public class RL extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.records_list, container, false);
+
+
 
         String rec = ((MainActivity)getActivity()).setContextRL();
 

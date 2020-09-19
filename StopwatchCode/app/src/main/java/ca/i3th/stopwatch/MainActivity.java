@@ -8,14 +8,20 @@ import android.app.AlertDialog;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Layout;
+import android.text.PrecomputedText;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     private Chronometer chronometer;
+    private TextView lr;
     private ImageButton startBtn, stopBtn, saveBtn, recListBtn;
     private Handler handler;
     private Stopwatch stopwatch;
@@ -27,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         LinearLayoutCompat linearLayoutCompat = findViewById(R.id.main_layout);
         AnimationDrawable animationDrawable = (AnimationDrawable) linearLayoutCompat.getBackground();
@@ -44,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         stopBtn = findViewById(R.id.btnStop);
         saveBtn = findViewById(R.id.btnSave);
         recListBtn = findViewById(R.id.btnRecList);
+        lr = findViewById(R.id.lastRecord);
 
         handler = new Handler();
 
@@ -78,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                stopwatch.saveRecord();
+                lr.setText(stopwatch.saveRecord());
             }
         });
 
