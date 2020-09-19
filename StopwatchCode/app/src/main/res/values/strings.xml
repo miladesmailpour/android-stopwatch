@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Stopwatch</string>
+    <string name="app_name">STOPWATCH (beta)</string>
     <string name="done_btn_rl">DONE</string>
     <string name="title_rl">RECORDS</string>
 </resources>

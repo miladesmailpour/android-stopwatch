@@ -2,17 +2,18 @@
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:drawable="@drawable/blue_gradient_1"
-        android:duration="1000">
+        android:duration="900">
         <stroke
             android:width="20dp"
             android:color="#000000" />
     </item>
 
     <item android:drawable="@drawable/blue_gradient_2"
-        android:duration="1000">
+        android:duration="900">
         <stroke
             android:width="20dp"
             android:color="#000000" />
     </item>
+
 
 </animation-list>
