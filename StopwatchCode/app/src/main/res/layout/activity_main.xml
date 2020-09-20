@@ -25,10 +25,11 @@
         android:layout_height="300dp"
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:background="@drawable/blue_gradient_list"
         android:orientation="vertical"
-        android:id="@+id/round_area">
+        android:id="@+id/round_area"
+        android:paddingTop="120dp">
 
         <Chronometer
             android:layout_width="wrap_content"

@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 animateRoundBlue.stop();
+                animationDrawable.start();
                 checkAnimate = false;
                 setBtn(2);
                 stopwatch.stopTime();
