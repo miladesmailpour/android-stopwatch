@@ -11,8 +11,10 @@ import android.os.Handler;
 import android.text.Layout;
 import android.text.PrecomputedText;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -26,8 +28,10 @@ public class MainActivity extends AppCompatActivity {
     private Handler handler;
     private Stopwatch stopwatch;
     private AlertDialog alertDialog;
-    private AnimationDrawable animateRoundBlue;
+    private AnimationDrawable animateRoundBlue, animationDrawable;
     private boolean checkAnimate = false;
+    private LinearLayoutCompat listV;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         LinearLayoutCompat linearLayoutCompat = findViewById(R.id.main_layout);
-        AnimationDrawable animationDrawable = (AnimationDrawable) linearLayoutCompat.getBackground();
+        animationDrawable = (AnimationDrawable) linearLayoutCompat.getBackground();
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();
@@ -45,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
         animateRoundBlue = (AnimationDrawable) roundLinear.getBackground();
         animateRoundBlue.setEnterFadeDuration(250);
         animateRoundBlue.setExitFadeDuration(500);
+
+        listV = findViewById(R.id.rl_root);
+
 
         chronometer = findViewById(R.id.chronometer);
         startBtn = findViewById(R.id.btnStart);
@@ -62,10 +69,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (!checkAnimate) {
                     animateRoundBlue.start();
+                    animationDrawable.stop();
                     checkAnimate = true;
             }
                 else {
                     animateRoundBlue.stop();
+                    animationDrawable.start();
                     checkAnimate = false;
                 }
                 setBtn(1);
@@ -87,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 lr.setText(stopwatch.saveRecord());
+                lr.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, android.R.anim.fade_out));
             }
         });
 
@@ -105,6 +115,12 @@ public class MainActivity extends AppCompatActivity {
         if (option == 2)
             startBtn.setImageDrawable(ResourcesCompat.getDrawable(
                     getResources(), R.drawable.ic_baseline_play_circle_filled_40, null));
+    }
+
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        return super.onKeyUp(keyCode, event);
     }
 
     public void openDialog(String list) {
