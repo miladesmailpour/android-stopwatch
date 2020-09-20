@@ -72,7 +72,13 @@ public class Stopwatch {
             list.clear();
         String lastR = (String.format("%02d", minute) + ":" + String.format("%02d", second)
                 + ":" + String.format("%02d", millisecond));
-        list.add(lastR);
+
+        if (!lastR.equals("00:00:00")) {
+            if (list.isEmpty())
+                list.add(lastR);
+            else if (!lastR.equals(list.get(list.size() - 1)))
+                list.add(lastR);
+        }
         return lastR;
     }
 
