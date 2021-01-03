@@ -13,6 +13,14 @@ public class Record {
     private String recordedTime;
     private String details;
 
+    public Record(int id, String date, String time, String recordedTime, String details) {
+        this.id = id;
+        this.date = date;
+        this.time = time;
+        this.recordedTime = recordedTime;
+        this.details = details;
+    }
+
     public int getId() {
         return id;
     }
