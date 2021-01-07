@@ -41,11 +41,11 @@ public class Lap extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState)
     {
         super.onActivityCreated(savedInstanceState);
-        try {
-            fragmentInfo = new FragmentInfo(tmpView);
-            tmpView.setLayoutParams(fragmentInfo.setFragmentHeightWeight(30, 30));
-        } catch (Exception e) {
-            Log.d(TAG, "2 GroupInfoFragment Height or weight Exception: " + e.toString());
-        }
+//        try {
+//            fragmentInfo = new FragmentInfo(tmpView);
+//            tmpView.setLayoutParams(fragmentInfo.setFragmentHeightWeight(30, 30));
+//        } catch (Exception e) {
+//            Log.d(TAG, "2 GroupInfoFragment Height or weight Exception: " + e.toString());
+//        }
     }
 }
