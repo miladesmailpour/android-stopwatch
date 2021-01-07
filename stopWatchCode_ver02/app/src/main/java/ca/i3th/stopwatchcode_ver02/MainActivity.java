@@ -2,13 +2,18 @@ package ca.i3th.stopwatchcode_ver02;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.SupportMapFragment;
 
 import java.util.HashMap;
 
@@ -35,11 +40,7 @@ public class MainActivity extends AppCompatActivity {
                     .setReorderingAllowed(true)
                     .commit();
         }
-//
-//        ConstraintLayout constraintLayout = findViewById(R.id.cl_main);
-//        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) constraintLayout.getLayoutParams();
-//        Log.d("TAG", "onCreateView: 88888888888888888888888888 " + layoutParams.height);
-////        constraintLayout.setLayoutParams(layoutParams);
+
 
         screenInfo = new ScreenInfo(new DisplayMetrics(), this);
         Toast.makeText(this, screenInfo.size() + " : " + screenInfo.screenLayout(), Toast.LENGTH_LONG).show();
