@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Chronometer;
 import android.widget.FrameLayout;
@@ -32,12 +33,14 @@ import ca.i3th.stopwatchcode_ver02.Fragments.Circles;
 import ca.i3th.stopwatchcode_ver02.Fragments.Lap;
 
 public class MainActivity extends AppCompatActivity {
-    private String TAG = "MainActivity";
+    private final String TAG = "MainActivity";
     private ScreenInfo screenInfo;
     private StopWatchManager stopwatch;
     private Handler handler;
     private Chronometer chronometer;
     private Circles circles;
+    private Btns btns;
+    private FrameLayout fl_mainContainer_middle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +49,17 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         String h = "";
         circles = new Circles();
+        btns = new Btns();
         if (savedInstanceState == null) {
             fragmentManager.beginTransaction()
                     .add(R.id.mainContainer_top, new Lap())
                     .add(R.id.mainContainer_middle, circles)
-                    .add(R.id.mainContainer_bottom, new Btns())
+                    .add(R.id.mainContainer_bottom, btns)
                     .setReorderingAllowed(true)
                     .commit();
         }
+
+        fl_mainContainer_middle = findViewById(R.id.mainContainer_middle);
 
 //        screenInfo = new ScreenInfo(new DisplayMetrics(), this);
 //        Toast.makeText(this, screenInfo.size() + " : " + screenInfo.screenLayout(), Toast.LENGTH_LONG).show();
@@ -70,7 +76,12 @@ public class MainActivity extends AppCompatActivity {
         chronometer = circles.getChronometer();
         handler = new Handler();
         stopwatch = new StopWatchManager(chronometer, handler);
-
+        fl_mainContainer_middle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btns.fl_handler(btns.getFlag());
+            }
+        });
 
     }
 

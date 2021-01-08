@@ -57,14 +57,14 @@ public class Btns extends Fragment {
                 flag = 1;
                 setBtn();
                 ((MainActivity) getActivity()).getStopwatch().stopTime();
-                ((MainActivity)getActivity()).openDialog(((MainActivity)getActivity()).getStopwatch().recordList());
+                ((MainActivity) getActivity()).openDialog(((MainActivity) getActivity()).getStopwatch().recordList());
             }
         });
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)getActivity()).getStopwatch().saveRecord();
+                ((MainActivity) getActivity()).getStopwatch().saveRecord();
                 btnSave.startAnimation(AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_out));
             }
         });
@@ -77,11 +77,27 @@ public class Btns extends Fragment {
             btnPlayPause.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
                     R.drawable.btn_button_play_150_foreground, null));
             flag = 2;
-        } else {
+        } else if (flag == 2) {
             btnPlayPause.setImageDrawable(ResourcesCompat.getDrawable(
                     getResources(), R.drawable.btn_button_pause_150_foreground, null));
             flag = 1;
+        } else {
+            flag = 0;
         }
     }
 
+    public int fl_handler(int f) {
+        if (f != 1 || f != 2) {
+            setBtn();
+            ((MainActivity) getActivity()).getStopwatch().startTime();
+        } else {
+            flag = 0;
+            return -1;
+        }
+        return flag;
+    }
+
+    public int getFlag() {
+        return flag;
+    }
 }
