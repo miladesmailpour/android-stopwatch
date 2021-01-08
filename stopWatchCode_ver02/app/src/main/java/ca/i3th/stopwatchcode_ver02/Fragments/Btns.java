@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -47,7 +48,6 @@ public class Btns extends Fragment {
             public void onClick(View view) {
                 setBtn();
                 ((MainActivity) getActivity()).getStopwatch().startTime();
-                Log.d(TAG, "onClick: start_cm() -------------------->");
             }
         });
 
@@ -57,9 +57,18 @@ public class Btns extends Fragment {
                 flag = 1;
                 setBtn();
                 ((MainActivity) getActivity()).getStopwatch().stopTime();
-                Log.d(TAG, "onClick: stop_cm() -------------------->");
+                ((MainActivity)getActivity()).openDialog(((MainActivity)getActivity()).getStopwatch().recordList());
             }
         });
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).getStopwatch().saveRecord();
+                btnSave.startAnimation(AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_out));
+            }
+        });
+
         return view;
     }
 
@@ -75,13 +84,4 @@ public class Btns extends Fragment {
         }
     }
 
-    public void save_cm() {
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setBtn();
-//                stopwatch.startTime();
-            }
-        });
-    }
 }

@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         chronometer = circles.getChronometer();
         handler = new Handler();
         stopwatch = new StopWatchManager(chronometer, handler);
-//        stopwatch.startTime();
+
 
     }
 
