@@ -2,58 +2,33 @@ package ca.i3th.stopwatchcode_ver02.Fragments;
 
 import android.os.Bundle;
 
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 
+import ca.i3th.stopwatchcode_ver02.MainActivity;
 import ca.i3th.stopwatchcode_ver02.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Btns#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Btns extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String TAG = "MainActivity";
+    private ImageButton btnPlayPause, btnPlay, btnStop, btnSave;
+    private int flag = 1;
 
     public Btns() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Btns.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Btns newInstance(String param1, String param2) {
-        Btns fragment = new Btns();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -61,6 +36,52 @@ public class Btns extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_btns, container, false);
+        View view = inflater.inflate(R.layout.fragment_btns, container, false);
+        btnPlayPause = view.findViewById(R.id.btnStart);
+        btnPlay = view.findViewById(R.id.btnStart);
+        btnStop = view.findViewById(R.id.btnStop);
+        btnSave = view.findViewById(R.id.btnSave);
+
+        btnPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setBtn();
+                ((MainActivity) getActivity()).getStopwatch().startTime();
+                Log.d(TAG, "onClick: start_cm() -------------------->");
+            }
+        });
+
+        btnStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                flag = 1;
+                setBtn();
+                ((MainActivity) getActivity()).getStopwatch().stopTime();
+                Log.d(TAG, "onClick: stop_cm() -------------------->");
+            }
+        });
+        return view;
+    }
+
+    private void setBtn() {
+        if (flag == 1) {
+            btnPlayPause.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
+                    R.drawable.btn_button_play_150_foreground, null));
+            flag = 2;
+        } else {
+            btnPlayPause.setImageDrawable(ResourcesCompat.getDrawable(
+                    getResources(), R.drawable.btn_button_pause_150_foreground, null));
+            flag = 1;
+        }
+    }
+
+    public void save_cm() {
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setBtn();
+//                stopwatch.startTime();
+            }
+        });
     }
 }

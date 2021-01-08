@@ -73,12 +73,8 @@ public class Circles extends Fragment {
     }
 
 
-    public Chronometer getChronometer() {
-        return this.chronometer;
-    }
+    public Chronometer getChronometer() { return this.chronometer; }
 
-    public void setChronometer(Chronometer chronometer) {
-        this.chronometer = chronometer;
-    }
+    public void setChronometer(Chronometer chronometer) { this.chronometer = chronometer; }
 
 }

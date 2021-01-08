@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,6 +20,8 @@ import android.widget.Toast;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.Circle;
 
+import java.lang.reflect.Array;
+import java.util.Collection;
 import java.util.HashMap;
 
 import ca.i3th.stopwatchcode_ver02.AuxFun.RecordList;
@@ -29,7 +32,7 @@ import ca.i3th.stopwatchcode_ver02.Fragments.Circles;
 import ca.i3th.stopwatchcode_ver02.Fragments.Lap;
 
 public class MainActivity extends AppCompatActivity {
-    private String TAG ="MainActivity";
+    private String TAG = "MainActivity";
     private ScreenInfo screenInfo;
     private StopWatchManager stopwatch;
     private Handler handler;
@@ -52,17 +55,12 @@ public class MainActivity extends AppCompatActivity {
                     .commit();
         }
 
-
-
-
-
-
-//        stopwatch.startTime();
 //        screenInfo = new ScreenInfo(new DisplayMetrics(), this);
 //        Toast.makeText(this, screenInfo.size() + " : " + screenInfo.screenLayout(), Toast.LENGTH_LONG).show();
 //        Log.d(TAG, "onCreate: -------------------------------> : " + screenInfo.size()
 //                + " : " + screenInfo.screenLayout() + " : " + screenInfo.density()
-//                + " : " +  screenInfo.sizePicker());
+//                + " : " + screenInfo.sizePicker());
+
 
     }
 
@@ -72,32 +70,32 @@ public class MainActivity extends AppCompatActivity {
         chronometer = circles.getChronometer();
         handler = new Handler();
         stopwatch = new StopWatchManager(chronometer, handler);
-        stopwatch.startTime();
+//        stopwatch.startTime();
 
     }
 
-    //    public  HashMap<String, Object> screenInfo(int option) {
-//        String[] op = {"0 : (double)Screen Size", "1 : (char)Screen Layout", "0 : (int)Screen Density", "0 : (int)Screen Picker"};
-//        HashMap<String, Object> result = new HashMap<>();
-//        ScreenInfo screenInfo = new ScreenInfo(new DisplayMetrics(), MainActivity.this);
-//        switch (option) {
-//            case 0:
-//                result.put("Screen Size", screenInfo.screenLayout());
-//                break;
-//            case 1:
-//                result.put("Screen Layout", screenInfo.screenLayout());
-//                break;
-//            case 2:
-//                result.put("Screen Density", screenInfo.density());
-//                break;
-//            case 3:
-//                result.put("Screen SizePicker", screenInfo.sizePicker());
-//                break;
-//            default:
-//                result.put("List of options", op);
-//        }
-//        return result;
-//    }
+    public static HashMap<String, Object> screenInfo(int option, Activity activity) {
+        String[] op = {"0 : ScreenInfoGuid", "1 : (double)Screen Size", "2 : (char)Screen Layout", "3 : (int)Screen Density", "4 : (int)Screen Picker"};
+        HashMap<String, Object> result = new HashMap<>();
+        ScreenInfo screenInfo = new ScreenInfo(new DisplayMetrics(), activity);
+        switch (option) {
+            case 1:
+                result.put("Screen Size", screenInfo.screenLayout());
+                break;
+            case 2:
+                result.put("Screen Layout", screenInfo.screenLayout());
+                break;
+            case 3:
+                result.put("Screen Density", screenInfo.density());
+                break;
+            case 4:
+                result.put("Screen SizePicker", screenInfo.sizePicker());
+                break;
+            default:
+                result.put("List of options", op);
+        }
+        return result;
+    }
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
@@ -108,7 +106,12 @@ public class MainActivity extends AppCompatActivity {
         RecordList rl = new RecordList();
         rl.show(getSupportFragmentManager(), "RecordList");
     }
+
     public String setContextRL() {
         return stopwatch.recordList();
+    }
+
+    public StopWatchManager getStopwatch() {
+        return stopwatch;
     }
 }

@@ -9,7 +9,7 @@
     tools:context=".Fragments.Circles">
 
     <FrameLayout
-        android:id="@+id/layout_wrapper"
+        android:id="@+id/layout_wrapper_circles"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="0dp"
