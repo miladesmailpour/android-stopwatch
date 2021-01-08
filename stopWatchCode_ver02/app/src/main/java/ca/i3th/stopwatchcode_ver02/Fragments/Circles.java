@@ -13,6 +13,7 @@ import android.view.animation.AnimationSet;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.ImageView;
 
 import ca.i3th.stopwatchcode_ver02.AuxFun.CircleAnimate;
@@ -21,7 +22,10 @@ import ca.i3th.stopwatchcode_ver02.R;
 
 public class Circles extends Fragment {
 
-    private ImageView ivLine;
+    private static final String TAG = "Circles";
+    //    private ImageView ivLine;
+    private Chronometer chronometer;
+
 
     public Circles() {
         // Required empty public constructor
@@ -40,6 +44,9 @@ public class Circles extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_circles, container, false);
+
+        this.chronometer = view.findViewById(R.id.chronometer_main);
+
 //        Button rotateBtn = view.findViewById(R.id.btnTest);
 //        ivLine = (ImageView) view.findViewById(R.id.imageView);
 //        ImageView iv = (ImageView) view.findViewById(R.id.imageView2);
@@ -64,4 +71,14 @@ public class Circles extends Fragment {
 //        });
         return view;
     }
+
+
+    public Chronometer getChronometer() {
+        return this.chronometer;
+    }
+
+    public void setChronometer(Chronometer chronometer) {
+        this.chronometer = chronometer;
+    }
+
 }
