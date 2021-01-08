@@ -21,13 +21,7 @@ import ca.i3th.stopwatchcode_ver02.R;
 
 public class Circles extends Fragment {
 
-    private float prvPoint = 0.0f, newPoint = 1.0f, rate = 1.0f;
-    private String str = "";
-    private AnimationSet animSet;
     private ImageView ivLine;
-    private Handler mHandler;
-    private boolean flag = false;
-    private int i;
 
     public Circles() {
         // Required empty public constructor
@@ -46,24 +40,28 @@ public class Circles extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_circles, container, false);
-        Button rotateBtn = view.findViewById(R.id.btnTest);
-        ivLine = (ImageView) view.findViewById(R.id.imageView);
-        CircleAnimate circleAnimate = new CircleAnimate(ivLine);
-        circleAnimate.startAnimate();
-        rotateBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (Boolean.toString(circleAnimate.getFlag())) {
-                    case "true":
-                        circleAnimate.setFlag(false);
-                        circleAnimate.resumeAnimate();
-                        break;
-                    case "false":
-                        circleAnimate.setFlag(true);
-                        break;
-                }//circleAnimate
-            }
-        });
+//        Button rotateBtn = view.findViewById(R.id.btnTest);
+//        ivLine = (ImageView) view.findViewById(R.id.imageView);
+//        ImageView iv = (ImageView) view.findViewById(R.id.imageView2);
+//        CircleAnimate circleAnimate = new CircleAnimate(ivLine);
+//        CircleAnimate circleAnimate1 = new CircleAnimate(iv);
+//
+//        circleAnimate1.startAnimate();
+//        circleAnimate.startAnimate();
+//        rotateBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                switch (Boolean.toString(circleAnimate.getFlag())) {
+//                    case "true":
+//                        circleAnimate.setFlag(false);
+//                        circleAnimate.resumeAnimate();
+//                        break;
+//                    case "false":
+//                        circleAnimate.setFlag(true);
+//                        break;
+//                }
+//            }
+//        });
         return view;
     }
 }

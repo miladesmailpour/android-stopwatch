@@ -1,23 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.Circles"
+    android:gravity="center"
     android:orientation="vertical"
-    android:gravity="center">
+    tools:context=".Fragments.Circles">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_rotate" />
+        android:layout_height="match_parent"
+        android:layout_margin="0dp"
+        android:padding="0dp">
 
-    <Button
-        android:id="@+id/btnTest"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button" />
-</LinearLayout>
+        <ImageView
+            android:id="@+id/iv_bg_0_0_black_foreground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/bg_0_0_black_foreground"/>
+
+        <ImageView
+            android:id="@+id/iv_digits_foreground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/digits_foreground"/>
+
+        <ImageView
+            android:id="@+id/iv_quarter_1_foreground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/quarter_1_foreground"
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:id="@+id/iv_quarter_2_foreground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/quarter_2_foreground"
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:id="@+id/iv_quarter_3_foreground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/quarter_3_foreground"
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:id="@+id/iv_quarter_4_foreground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/quarter_4_foreground"
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:id="@+id/iv_bg_0_black_foreground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/bg_0_black_foreground" />
+
+        <ImageView
+            android:id="@+id/iv_bg_1_orange_y_foreground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/bg_1_orange_y_foreground" />
+
+        <ImageView
+            android:id="@+id/iv_bg_2_yellow_o_foreground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/bg_2_yellow_o_foreground" />
+
+        <ImageView
+            android:id="@+id/iv_bg_3_black_foreground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/bg_3_black_foreground" />
+
+        <ImageView
+            android:id="@+id/iv_pointer_hour_foreground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/pointer_hour_foreground" />
+
+        <ImageView
+            android:id="@+id/iv_pointer_minute_foreground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/pointer_minute_foreground" />
+
+        <ImageView
+            android:id="@+id/iv_pointer_second_foreground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/pointer_second_foreground" />
+    </FrameLayout>
+</RelativeLayout>
