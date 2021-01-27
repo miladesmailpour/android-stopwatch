@@ -1,15 +1,11 @@
 package ca.i3th.stopwatchcode_ver02.AuxFun;
 
-import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
-import android.view.View;
 import android.view.animation.AnimationSet;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
-
-import ca.i3th.stopwatchcode_ver02.R;
 
 public class CircleAnimate {
     private final String TAG = "CircleAnimate";
@@ -19,19 +15,20 @@ public class CircleAnimate {
     private int i = -1;
     private String str = "";
     private boolean flag = true;
-    private ImageView imageView, imageViewBK;
+    private ImageView imageView;
     private Thread thread;
-    private int sleepTime = 1000;
+    private long sleepTime = 1000;
     private RotateAnimation animRotate;
+    private char scoop = 's';
     //    public CircleAnimate(Handler mHandler, AnimationSet animSet) {
 //        this.mHandler = mHandler;
 //        this.animSet = animSet;
 //    }
-    public CircleAnimate(ImageView imageView) {
+    public CircleAnimate(ImageView imageView, char scoop) {
         this.mHandler = new Handler();
         this.animSet = new AnimationSet(true);
         this.imageView = imageView;
-        this.imageViewBK = imageView;
+        this.scoop = scoop;
     }
 
     public void startAnimate() {
@@ -44,9 +41,9 @@ public class CircleAnimate {
     public void pauseAnimate() {
         setFlag(true);
         try {
-            Log.d(TAG, "stopAnimate: B>>>>>>>>>>>>>>>>>>>>>>>>>>" + thread.isInterrupted());
+//            Log.d(TAG, "stopAnimate: B>>>>>>>>>>>>>>>>>>>>>>>>>>" + thread.isInterrupted());
             thread.interrupt();
-            Log.d(TAG, "stopAnimate: A>>>>>>>>>>>>>>>>>>>>>>>>>>" + thread.isInterrupted());
+//            Log.d(TAG, "stopAnimate: A>>>>>>>>>>>>>>>>>>>>>>>>>>" + thread.isInterrupted());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -60,15 +57,14 @@ public class CircleAnimate {
 
     public void stopAnimate() {
         setFlag(true);
+        i = -1;
         try {
-            Log.d(TAG, "stopAnimate: B>>>>>>>>>>>>>>>>>>>>>>>>>>" + thread.isInterrupted());
+
             thread.interrupt();
             imageView.clearAnimation();
 
             this.animSet = new AnimationSet(true);
 
-
-            Log.d(TAG, "stopAnimate: A>>>>>>>>>>>>>>>>>>>>>>>>>>" + thread.isInterrupted());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -93,11 +89,12 @@ public class CircleAnimate {
                 for (i = i; ; i++) {
                     Log.d("TAG", "run: " + i);
                     if (flag) {
-                        animRotate.reset();
+//                        animRotate.reset();
                         break;
                     }
                     try {
-                        Thread.sleep(sleepTime);
+
+                        Thread.sleep(setPointerScoop(scoop));
                         mHandler.post(new Runnable() {
 
                             @Override
@@ -105,7 +102,7 @@ public class CircleAnimate {
                                 animRotate = new RotateAnimation(0.0f, 6.0f,
                                         RotateAnimation.RELATIVE_TO_SELF, 0.5f,
                                         RotateAnimation.RELATIVE_TO_SELF, 0.5f);
-                                Log.d("TAG", "run: current thread +++++++++++++++++++++++++++" + " : " + firstPoint + prvPoint + "->" + newPoint);
+//                                Log.d("TAG", "run: current thread +++++++++++++++++++++++++++" + " : " + firstPoint + prvPoint + "->" + newPoint);
                                 newPoint = counter(newPoint);
                                 animSet.addAnimation(animRotate);
                                 imageView.startAnimation(animSet);
@@ -128,24 +125,20 @@ public class CircleAnimate {
         this.flag = flag;
     }
 
-    public boolean setPointerScoop(char scoop) {
-        boolean bool = false;
+    public long setPointerScoop(char scoop) {
         switch (scoop) {
             case 'h':
                 sleepTime = 3600000;
-                bool = true;
                 break;
             case 'm':
                 sleepTime = 60000;
-                bool = true;
                 break;
             case 's':
                 sleepTime = 1000;
-                bool = true;
                 break;
             default:
                 break;
         }
-        return bool;
+        return sleepTime;
     }
 }

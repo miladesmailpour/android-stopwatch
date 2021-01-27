@@ -53,9 +53,9 @@ public class Circles extends Fragment {
         ivSecond = (ImageView) view.findViewById(R.id.iv_pointer_second_foreground);
         ivMinute = (ImageView) view.findViewById(R.id.iv_pointer_minute_foreground);
         ivHour = (ImageView) view.findViewById(R.id.iv_pointer_hour_foreground);
-        circleAnimateSec = new CircleAnimate(ivSecond);
-        circleAnimateMin = new CircleAnimate(ivMinute);
-        circleAnimateHour = new CircleAnimate(ivHour);
+        circleAnimateSec = new CircleAnimate(ivSecond, 's');
+        circleAnimateMin = new CircleAnimate(ivMinute, 'm');
+        circleAnimateHour = new CircleAnimate(ivHour, 'h');
 
 
 
@@ -69,10 +69,23 @@ public class Circles extends Fragment {
             case "true" :
                 circleAnimateSec.setFlag(false);
                 circleAnimateSec.startAnimate();
+
+                circleAnimateMin.setFlag(false);
+                circleAnimateMin.startAnimate();
+
+                circleAnimateHour.setFlag(false);
+                circleAnimateHour.startAnimate();
                 break;
+
             case "false" :
                 circleAnimateSec.setFlag(true);
                 circleAnimateSec.pauseAnimate();
+
+                circleAnimateMin.setFlag(true);
+                circleAnimateMin.pauseAnimate();
+
+                circleAnimateHour.setFlag(true);
+                circleAnimateHour.pauseAnimate();
                 break;
         }
 
@@ -81,6 +94,8 @@ public class Circles extends Fragment {
     public boolean stopPointers() {
         boolean pointer = false;
         circleAnimateSec.stopAnimate();
+        circleAnimateMin.stopAnimate();
+        circleAnimateHour.stopAnimate();
         return pointer;
     }
 
