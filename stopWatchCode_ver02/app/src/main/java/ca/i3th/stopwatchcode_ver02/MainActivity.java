@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private StopWatchManager stopwatch;
     private Handler handler;
     private Chronometer chronometer;
+    private Lap lap;
     private Circles circles;
     private Btns btns;
     private FrameLayout fl_mainContainer_middle;
@@ -50,9 +51,10 @@ public class MainActivity extends AppCompatActivity {
         String h = "";
         circles = new Circles();
         btns = new Btns();
+        lap = new Lap();
         if (savedInstanceState == null) {
             fragmentManager.beginTransaction()
-                    .add(R.id.mainContainer_top, new Lap())
+                    .add(R.id.mainContainer_top, lap)
                     .add(R.id.mainContainer_middle, circles)
                     .add(R.id.mainContainer_bottom, btns)
                     .setReorderingAllowed(true)
@@ -116,6 +118,10 @@ public class MainActivity extends AppCompatActivity {
     public void openDialog(String list) {
         RecordList rl = new RecordList();
         rl.show(getSupportFragmentManager(), "RecordList");
+    }
+
+    public Circles getCircles() {
+        return circles;
     }
 
     public String setContextRL() {

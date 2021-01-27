@@ -19,12 +19,14 @@ import android.widget.ImageView;
 import ca.i3th.stopwatchcode_ver02.AuxFun.CircleAnimate;
 import ca.i3th.stopwatchcode_ver02.R;
 
-
 public class Circles extends Fragment {
 
     private static final String TAG = "Circles";
-    //    private ImageView ivLine;
+    private ImageView ivSecond, ivMinute, ivHour;
+    private int sec, min, hour = 0;
     private Chronometer chronometer;
+    private CircleAnimate circleAnimateSec, circleAnimateMin, circleAnimateHour;
+    private Thread thread;
 
 
     public Circles() {
@@ -47,34 +49,48 @@ public class Circles extends Fragment {
 
         this.chronometer = view.findViewById(R.id.chronometer_main);
 
-//        Button rotateBtn = view.findViewById(R.id.btnTest);
-//        ivLine = (ImageView) view.findViewById(R.id.imageView);
-//        ImageView iv = (ImageView) view.findViewById(R.id.imageView2);
-//        CircleAnimate circleAnimate = new CircleAnimate(ivLine);
-//        CircleAnimate circleAnimate1 = new CircleAnimate(iv);
-//
-//        circleAnimate1.startAnimate();
-//        circleAnimate.startAnimate();
-//        rotateBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                switch (Boolean.toString(circleAnimate.getFlag())) {
-//                    case "true":
-//                        circleAnimate.setFlag(false);
-//                        circleAnimate.resumeAnimate();
-//                        break;
-//                    case "false":
-//                        circleAnimate.setFlag(true);
-//                        break;
-//                }
-//            }
-//        });
+
+        ivSecond = (ImageView) view.findViewById(R.id.iv_pointer_second_foreground);
+        ivMinute = (ImageView) view.findViewById(R.id.iv_pointer_minute_foreground);
+        ivHour = (ImageView) view.findViewById(R.id.iv_pointer_hour_foreground);
+        circleAnimateSec = new CircleAnimate(ivSecond);
+        circleAnimateMin = new CircleAnimate(ivMinute);
+        circleAnimateHour = new CircleAnimate(ivHour);
+
+
+
         return view;
     }
 
 
-    public Chronometer getChronometer() { return this.chronometer; }
+    public void runPointers() {
 
-    public void setChronometer(Chronometer chronometer) { this.chronometer = chronometer; }
+        switch (Boolean.toString(circleAnimateSec.getFlag())) {
+            case "true" :
+                circleAnimateSec.setFlag(false);
+                circleAnimateSec.startAnimate();
+                break;
+            case "false" :
+                circleAnimateSec.setFlag(true);
+                circleAnimateSec.pauseAnimate();
+                break;
+        }
+
+    }
+
+    public boolean stopPointers() {
+        boolean pointer = false;
+        circleAnimateSec.stopAnimate();
+        return pointer;
+    }
+
+    public Chronometer getChronometer() {
+        return this.chronometer;
+    }
+
+    public void setChronometer(Chronometer chronometer) {
+        this.chronometer = chronometer;
+    }
 
 }
+

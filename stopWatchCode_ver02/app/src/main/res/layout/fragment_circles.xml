@@ -98,15 +98,15 @@
             android:src="@mipmap/pointer_second_foreground" />
 
         <Chronometer
+            android:id="@+id/chronometer_main"
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:id="@+id/chronometer_main"
-            android:format="00:00:00"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/digital_7"
-            android:textColor="@android:color/white"
             android:layout_gravity="center"
-            android:gravity="center"/>
+            android:fontFamily="@font/digital_7"
+            android:format="00:00:00"
+            android:gravity="center"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="40sp"
+            android:textStyle="bold" />
     </FrameLayout>
 </RelativeLayout>

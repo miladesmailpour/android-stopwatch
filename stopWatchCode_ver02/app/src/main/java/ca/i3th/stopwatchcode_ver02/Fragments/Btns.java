@@ -48,16 +48,18 @@ public class Btns extends Fragment {
             public void onClick(View view) {
                 setBtn();
                 ((MainActivity) getActivity()).getStopwatch().startTime();
+                ((MainActivity)getActivity()).getCircles().runPointers();//////////////
             }
         });
 
         btnStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                flag = 1;
+                flag = 2;
                 setBtn();
+                ((MainActivity)getActivity()).getCircles().stopPointers();
                 ((MainActivity) getActivity()).getStopwatch().stopTime();
-                ((MainActivity) getActivity()).openDialog(((MainActivity) getActivity()).getStopwatch().recordList());
+//                ((MainActivity) getActivity()).openDialog(((MainActivity) getActivity()).getStopwatch().recordList());
             }
         });
 
@@ -75,11 +77,12 @@ public class Btns extends Fragment {
     private void setBtn() {
         if (flag == 1) {
             btnPlayPause.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
-                    R.drawable.btn_button_play_150_foreground, null));
+                    R.drawable.btn_button_pause_150_foreground, null));
             flag = 2;
         } else if (flag == 2) {
-            btnPlayPause.setImageDrawable(ResourcesCompat.getDrawable(
-                    getResources(), R.drawable.btn_button_pause_150_foreground, null));
+            btnPlayPause.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
+                    R.drawable.btn_button_play_150_foreground, null));
+
             flag = 1;
         } else {
             flag = 0;
