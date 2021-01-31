@@ -2,6 +2,8 @@ package ca.i3th.stopwatchcode_ver02.AuxFun;
 
 import android.os.Handler;
 import android.util.Log;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.RotateAnimation;
@@ -14,16 +16,14 @@ public class CircleAnimate {
     private float firstPoint = 0.0f, prvPoint = 0.0f, newPoint = 0.0f, rate = 1.0f;
     private int i = -1;
     private String str = "";
-    private boolean flag = true;
+    private boolean flag = true, sw = true;
     private ImageView imageView;
     private Thread thread;
     private long sleepTime = 1000;
     private RotateAnimation animRotate;
     private char scoop = 's';
-    //    public CircleAnimate(Handler mHandler, AnimationSet animSet) {
-//        this.mHandler = mHandler;
-//        this.animSet = animSet;
-//    }
+
+
     public CircleAnimate(ImageView imageView, char scoop) {
         this.mHandler = new Handler();
         this.animSet = new AnimationSet(true);
@@ -87,6 +87,7 @@ public class CircleAnimate {
             @Override
             public void run() {
                 for (i = i; ; i++) {
+
                     Log.d("TAG", "run: " + i);
                     if (flag) {
 //                        animRotate.reset();
@@ -102,6 +103,7 @@ public class CircleAnimate {
                                 animRotate = new RotateAnimation(0.0f, 6.0f,
                                         RotateAnimation.RELATIVE_TO_SELF, 0.5f,
                                         RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+
 //                                Log.d("TAG", "run: current thread +++++++++++++++++++++++++++" + " : " + firstPoint + prvPoint + "->" + newPoint);
                                 newPoint = counter(newPoint);
                                 animSet.addAnimation(animRotate);
