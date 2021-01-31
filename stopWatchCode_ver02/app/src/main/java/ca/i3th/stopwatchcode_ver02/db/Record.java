@@ -4,12 +4,12 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "records")
-public class Records {
+public class Record {
     @PrimaryKey(autoGenerate = true)
     private int rid;
     private String record;
 
-    public Records(String record) {
+    public Record(String record) {
         this.record = record;
     }
 

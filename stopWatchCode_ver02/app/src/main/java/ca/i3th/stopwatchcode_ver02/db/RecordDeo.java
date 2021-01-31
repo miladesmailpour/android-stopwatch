@@ -13,17 +13,17 @@ import java.util.List;
 @Dao
 public interface RecordDeo {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insert(Records record);
+    long insert(Record record);
 
     @Update
-    int update(Records record);
+    int update(Record record);
 
     @Delete
-    boolean delete(Records records);
+    boolean delete(Record records);
 
-    @Query("DELETE FROM records")
+    @Query("DELETE FROM Record")
     void deleteAll();
 
-    @Query("SELECT * FROM records ORDER BY rid DESC")
-    LiveData<List<Records>> getAllRecords();
+    @Query("SELECT * FROM Record ORDER BY rid DESC")
+    LiveData<List<Record>> getAllRecords();
 }
