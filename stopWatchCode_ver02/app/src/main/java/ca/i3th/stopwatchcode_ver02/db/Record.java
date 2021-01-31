@@ -17,6 +17,10 @@ public class Record {
         return record;
     }
 
+    public int getRid() {
+        return rid;
+    }
+
     public void setRid(int rid) {
         this.rid = rid;
     }

@@ -11,19 +11,19 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-public interface RecordDeo {
+public interface RecordDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insert(Record record);
+    void insert(Record record);
 
     @Update
-    int update(Record record);
+    void update(Record record);
 
     @Delete
-    boolean delete(Record records);
+    void delete(Record records);
 
-    @Query("DELETE FROM Record")
+    @Query("DELETE FROM records")
     void deleteAll();
 
-    @Query("SELECT * FROM Record ORDER BY rid DESC")
+    @Query("SELECT * FROM records ORDER BY rid DESC")
     LiveData<List<Record>> getAllRecords();
 }
