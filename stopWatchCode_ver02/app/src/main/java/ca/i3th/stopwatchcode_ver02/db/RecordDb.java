@@ -1,10 +1,13 @@
 package ca.i3th.stopwatchcode_ver02.db;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 @Database(entities = {Record.class}, version = 1)
 public abstract class RecordDb extends RoomDatabase {

@@ -12,7 +12,8 @@ import java.util.List;
 
 @Dao
 public interface RecordDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+
+    @Insert
     void insert(Record record);
 
     @Update

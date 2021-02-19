@@ -4,13 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Activity;
-import android.content.res.Configuration;
+import android.app.Application;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +19,9 @@ import android.widget.Chronometer;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.Circle;
 
-import java.lang.reflect.Array;
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 import ca.i3th.stopwatchcode_ver02.AuxFun.RecordList;
 import ca.i3th.stopwatchcode_ver02.AuxFun.ScreenInfo;
@@ -31,6 +29,8 @@ import ca.i3th.stopwatchcode_ver02.AuxFun.StopWatchManager;
 import ca.i3th.stopwatchcode_ver02.Fragments.Btns;
 import ca.i3th.stopwatchcode_ver02.Fragments.Circles;
 import ca.i3th.stopwatchcode_ver02.Fragments.Lap;
+import ca.i3th.stopwatchcode_ver02.db.Record;
+import ca.i3th.stopwatchcode_ver02.db.RecordViewModel;
 
 public class MainActivity extends AppCompatActivity {
     private final String TAG = "MainActivity";
@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
     private Circles circles;
     private Btns btns;
     private FrameLayout fl_mainContainer_middle;
+    private Application app;
+
+//    private RecordViewModel recordViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         FragmentManager fragmentManager = getSupportFragmentManager();
         String h = "";
+        app = this.getApplication();
+//        recordViewModel = new ViewModelProvider(this, ViewModelProvider
+//                .AndroidViewModelFactory.getInstance(this.getApplication()))
+//                .get(RecordViewModel.class);
+//        recordViewModel.getAllRecord().observe(this, new Observer<List<Record>>() {
+//            @Override
+//            public void onChanged(List<Record> records) {
+//                Toast.makeText(MainActivity.this, "onChange", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
         circles = new Circles();
         btns = new Btns();
         lap = new Lap();
@@ -131,4 +145,6 @@ public class MainActivity extends AppCompatActivity {
     public StopWatchManager getStopwatch() {
         return stopwatch;
     }
+
+    public Application getApp() { return app;}
 }
