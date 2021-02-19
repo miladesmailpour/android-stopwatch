@@ -7,6 +7,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import ca.i3th.stopwatchcode_ver02.Adaptors.RecordAdapter;
 import ca.i3th.stopwatchcode_ver02.AuxFun.FragmentInfo;
 import ca.i3th.stopwatchcode_ver02.MainActivity;
 import ca.i3th.stopwatchcode_ver02.R;
@@ -44,13 +47,20 @@ public class Lap extends Fragment {
         View view = inflater.inflate(R.layout.fragment_lap, container, false);
         tmpView= view;
 
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(((MainActivity)getActivity()).getApp()));
+        recyclerView.setHasFixedSize(true);
+
+        RecordAdapter recordAdapter = new RecordAdapter();
+        recyclerView.setAdapter(recordAdapter);
+
         recordViewModel = new ViewModelProvider(this, ViewModelProvider
                 .AndroidViewModelFactory.getInstance(((MainActivity)getActivity()).getApp()))
                 .get(RecordViewModel.class);
         recordViewModel.getAllRecord().observe(this, new Observer<List<Record>>() {
             @Override
             public void onChanged(List<Record> records) {
-                Toast.makeText(getActivity(), "onChange", Toast.LENGTH_SHORT).show();
+                recordAdapter.setRecords(records);
             }
         });
 
