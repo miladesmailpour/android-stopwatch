@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 
 import ca.i3th.stopwatchcode_ver02.MainActivity;
 import ca.i3th.stopwatchcode_ver02.R;
+import ca.i3th.stopwatchcode_ver02.db.Record;
 
 public class Btns extends Fragment {
 
@@ -48,7 +49,7 @@ public class Btns extends Fragment {
             public void onClick(View view) {
                 setBtn();
                 ((MainActivity) getActivity()).getStopwatch().startTime();
-                ((MainActivity)getActivity()).getCircles().runPointers();//////////////
+                ((MainActivity) getActivity()).getCircles().runPointers();//////////////
             }
         });
 
@@ -57,7 +58,7 @@ public class Btns extends Fragment {
             public void onClick(View view) {
                 flag = 2;
                 setBtn();
-                ((MainActivity)getActivity()).getCircles().stopPointers();
+                ((MainActivity) getActivity()).getCircles().stopPointers();
                 ((MainActivity) getActivity()).getStopwatch().stopTime();
 //                ((MainActivity) getActivity()).openDialog(((MainActivity) getActivity()).getStopwatch().recordList());
             }
@@ -66,8 +67,14 @@ public class Btns extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity) getActivity()).getStopwatch().saveRecord();
-                btnSave.startAnimation(AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_out));
+                String flag = ((MainActivity) getActivity()).getStopwatch().currentRecord();
+                Log.d(TAG, "onClick: ========================>" + flag);
+                if (!flag.equals("-1")) {
+                    Log.d(TAG, "onClick: ========================>in " + flag);
+                    ((MainActivity) getActivity()).getRecordViewModel().insert(new Record(flag));
+
+                    btnSave.startAnimation(AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_out));
+                }
             }
         });
 

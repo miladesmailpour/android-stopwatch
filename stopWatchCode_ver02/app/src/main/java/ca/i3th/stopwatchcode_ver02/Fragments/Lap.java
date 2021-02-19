@@ -46,7 +46,7 @@ public class Lap extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lap, container, false);
         tmpView= view;
-
+        recordViewModel = ((MainActivity)getActivity()).getRecordViewModel();
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(((MainActivity)getActivity()).getApp()));
         recyclerView.setHasFixedSize(true);
@@ -57,6 +57,7 @@ public class Lap extends Fragment {
         recordViewModel = new ViewModelProvider(this, ViewModelProvider
                 .AndroidViewModelFactory.getInstance(((MainActivity)getActivity()).getApp()))
                 .get(RecordViewModel.class);
+        setRecordViewModel();
         recordViewModel.getAllRecord().observe(this, new Observer<List<Record>>() {
             @Override
             public void onChanged(List<Record> records) {
@@ -65,6 +66,10 @@ public class Lap extends Fragment {
         });
 
         return view;
+    }
+
+    private void setRecordViewModel() {
+        ((MainActivity)getActivity()).setRecordViewModel(recordViewModel);
     }
 
     @Override

@@ -66,19 +66,20 @@ public class StopWatchManager {
         return str;
     }
 
-    public String saveRecord() {
-        if (list.size() > 9)
-            list.clear();
-        String lastR = (String.format("%02d", minute) + ":" + String.format("%02d", second)
+    public String currentRecord() {
+
+        String cr = (String.format("%02d", minute) + ":" + String.format("%02d", second)
                 + ":" + String.format("%02d", millisecond));
 
-        if (!lastR.equals("00:00:00")) {
-            if (list.isEmpty())
-                list.add(lastR);
-            else if (!lastR.equals(list.get(list.size() - 1)))
-                list.add(lastR);
+        if (!cr.equals("00:00:00")) {
+            if (list.isEmpty() || (!cr.equals(list.get(list.size() - 1)))){
+                list.clear();
+                list.add(cr);
+                return cr;
+            }
+            return "-1";
         }
-        return lastR;
+        return "-1";
     }
 
     private Runnable runnable = new Runnable() {

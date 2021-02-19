@@ -1,5 +1,6 @@
 package ca.i3th.stopwatchcode_ver02;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Chronometer;
@@ -43,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private Btns btns;
     private FrameLayout fl_mainContainer_middle;
     private Application app;
+    private RecordViewModel recordViewModel;
 
 //    private RecordViewModel recordViewModel;
 
@@ -134,6 +139,35 @@ public class MainActivity extends AppCompatActivity {
         rl.show(getSupportFragmentManager(), "RecordList");
     }
 
+    private void saveRecord() {
+        Record record = new Record("1239");
+        recordViewModel.insert(record);
+    }
+    private void restRecords() {
+        recordViewModel.deleteAll();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.main_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_save:
+                saveRecord();
+                return true;
+            case R.id.menu_rest:
+                restRecords();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     public Circles getCircles() {
         return circles;
     }
@@ -146,5 +180,9 @@ public class MainActivity extends AppCompatActivity {
         return stopwatch;
     }
 
-    public Application getApp() { return app;}
+    public Application getApp() { return app; }
+
+    public RecordViewModel getRecordViewModel() { return recordViewModel; }
+
+    public void setRecordViewModel(RecordViewModel rvm) { recordViewModel = rvm; }
 }
