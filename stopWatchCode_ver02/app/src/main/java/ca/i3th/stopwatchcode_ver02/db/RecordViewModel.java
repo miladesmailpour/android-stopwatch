@@ -12,8 +12,11 @@ public class RecordViewModel extends AndroidViewModel {
 
     private RecordRepository repository;
     private LiveData<List<Record>> allRecord;
+
     public RecordViewModel(@NonNull Application application) {
         super(application);
+        repository = new RecordRepository(application);
+        allRecord = repository.getAllRecords();
     }
     public void insert(Record record) {
         repository.insert(record);
