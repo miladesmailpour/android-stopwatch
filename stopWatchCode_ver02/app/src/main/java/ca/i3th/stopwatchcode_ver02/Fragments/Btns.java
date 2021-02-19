@@ -68,20 +68,17 @@ public class Btns extends Fragment {
             @Override
             public void onClick(View view) {
                 String flag = ((MainActivity) getActivity()).getStopwatch().currentRecord();
-                Log.d(TAG, "onClick: ========================>" + flag);
                 if (!flag.equals("-1")) {
-                    Log.d(TAG, "onClick: ========================>in " + flag);
                     ((MainActivity) getActivity()).getRecordViewModel().insert(new Record(flag));
 
                     btnSave.startAnimation(AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_out));
                 }
             }
         });
-
         return view;
     }
 
-    private void setBtn() {
+    public void setBtn() {
         if (flag == 1) {
             btnPlayPause.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
                     R.drawable.btn_button_pause_150_foreground, null));

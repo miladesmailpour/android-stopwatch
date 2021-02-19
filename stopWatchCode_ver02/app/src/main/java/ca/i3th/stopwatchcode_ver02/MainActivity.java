@@ -19,6 +19,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Chronometer;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ import ca.i3th.stopwatchcode_ver02.AuxFun.StopWatchManager;
 import ca.i3th.stopwatchcode_ver02.Fragments.Btns;
 import ca.i3th.stopwatchcode_ver02.Fragments.Circles;
 import ca.i3th.stopwatchcode_ver02.Fragments.Lap;
+import ca.i3th.stopwatchcode_ver02.databinding.ActivityMainBinding;
 import ca.i3th.stopwatchcode_ver02.db.Record;
 import ca.i3th.stopwatchcode_ver02.db.RecordViewModel;
 
@@ -140,11 +142,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveRecord() {
-        Record record = new Record("1239");
-        recordViewModel.insert(record);
+        String flag = getStopwatch().currentRecord();
+        if (!flag.equals("-1")) {
+            getRecordViewModel().insert(new Record(flag));
+
+        }
     }
     private void restRecords() {
-        recordViewModel.deleteAll();
+        if (!getStopwatch().getIsActive()) {
+            getStopwatch().stopTime();
+            getCircles().stopPointers();
+            recordViewModel.deleteAll();
+        }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

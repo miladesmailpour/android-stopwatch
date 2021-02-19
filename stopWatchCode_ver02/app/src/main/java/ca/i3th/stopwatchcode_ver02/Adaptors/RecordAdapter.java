@@ -30,7 +30,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordHold
     @Override
     public void onBindViewHolder(@NonNull RecordHolder holder, int position) {
         Record currRecord = records.get(position);
-        holder.rid.setText(String.valueOf(currRecord.getRid()));
+//        holder.rid.setText(String.valueOf(currRecord.getRid()));
         holder.record.setText(currRecord.getRecord());
     }
 
@@ -48,7 +48,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordHold
         private TextView record;
         public RecordHolder(View view) {
             super(view);
-            rid = view.findViewById(R.id.tv_rid);
+//            rid = view.findViewById(R.id.tv_rid);
             record = view.findViewById(R.id.tv_record);
         }
     }

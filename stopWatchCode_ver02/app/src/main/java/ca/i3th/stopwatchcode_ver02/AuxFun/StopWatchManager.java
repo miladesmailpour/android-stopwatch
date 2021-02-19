@@ -96,5 +96,9 @@ public class StopWatchManager {
             handler.postDelayed(this, 60);
         }
     };
+
+    public boolean getIsActive() {
+        return isActive;
+    }
 }
 
