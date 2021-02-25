@@ -22,11 +22,12 @@ import ca.i3th.stopwatchcode_ver02.R;
 public class Circles extends Fragment {
 
     private static final String TAG = "Circles";
-    private ImageView ivSecond, ivMinute, ivHour;
+    private ImageView ivSecond, ivMinute, ivHour, ivQ1, ivQ2, ivQ3, ivQ4;
+    private ImageView[] qList;
     private int sec, min, hour = 0;
     private Chronometer chronometer;
     private CircleAnimate circleAnimateSec, circleAnimateMin, circleAnimateHour;
-    private Thread thread;
+
 
 
     public Circles() {
@@ -49,13 +50,17 @@ public class Circles extends Fragment {
 
         this.chronometer = view.findViewById(R.id.chronometer_main);
 
-
+        ivQ1 = (ImageView) view.findViewById(R.id.iv_quarter_1_foreground);
+        ivQ2 = (ImageView) view.findViewById(R.id.iv_quarter_2_foreground);
+        ivQ3 = (ImageView) view.findViewById(R.id.iv_quarter_3_foreground);
+        ivQ4 = (ImageView) view.findViewById(R.id.iv_quarter_4_foreground);
+        qList = new ImageView[]{ivQ1, ivQ2, ivQ3, ivQ4};
         ivSecond = (ImageView) view.findViewById(R.id.iv_pointer_second_foreground);
         ivMinute = (ImageView) view.findViewById(R.id.iv_pointer_minute_foreground);
         ivHour = (ImageView) view.findViewById(R.id.iv_pointer_hour_foreground);
-        circleAnimateSec = new CircleAnimate(ivSecond, 's');
-        circleAnimateMin = new CircleAnimate(ivMinute, 'm');
-        circleAnimateHour = new CircleAnimate(ivHour, 'h');
+        circleAnimateSec = new CircleAnimate(ivSecond, 's', qList);
+        circleAnimateMin = new CircleAnimate(ivMinute, 'm', qList);
+        circleAnimateHour = new CircleAnimate(ivHour, 'h', qList);
 
 
 
@@ -92,11 +97,11 @@ public class Circles extends Fragment {
     }
 
     public boolean stopPointers() {
-        boolean pointer = false;
+//        boolean pointer = false;
         circleAnimateSec.stopAnimate();
         circleAnimateMin.stopAnimate();
         circleAnimateHour.stopAnimate();
-        return pointer;
+        return true;
     }
 
     public Chronometer getChronometer() {
@@ -106,6 +111,7 @@ public class Circles extends Fragment {
     public void setChronometer(Chronometer chronometer) {
         this.chronometer = chronometer;
     }
+
 
 }
 

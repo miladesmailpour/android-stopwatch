@@ -1,7 +1,7 @@
 package ca.i3th.stopwatchcode_ver02.Fragments;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
-
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
@@ -50,6 +50,7 @@ public class Btns extends Fragment {
                 setBtn();
                 ((MainActivity) getActivity()).getStopwatch().startTime();
                 ((MainActivity) getActivity()).getCircles().runPointers();//////////////
+                btnSound();
             }
         });
 
@@ -102,6 +103,11 @@ public class Btns extends Fragment {
             return -1;
         }
         return flag;
+    }
+
+    private void btnSound() {
+        MediaPlayer mediaPlayer = MediaPlayer.create(((MainActivity)getActivity()).getApp(), R.raw.beep23);
+        mediaPlayer.start();
     }
 
     public int getFlag() {

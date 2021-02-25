@@ -198,4 +198,5 @@ public class MainActivity extends AppCompatActivity {
     public RecordViewModel getRecordViewModel() { return recordViewModel; }
 
     public void setRecordViewModel(RecordViewModel rvm) { recordViewModel = rvm; }
+
 }

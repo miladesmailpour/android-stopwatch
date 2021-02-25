@@ -19,41 +19,47 @@
             android:id="@+id/iv_bg_0_0_black_foreground"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@mipmap/bg_0_0_black_foreground"/>
+            android:src="@mipmap/bg_0_0_black_foreground" />
 
         <ImageView
             android:id="@+id/iv_digits_foreground"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@mipmap/digits_foreground"/>
+            android:src="@mipmap/digits_foreground" />
 
         <ImageView
             android:id="@+id/iv_quarter_1_foreground"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:alpha="0.4"
             android:src="@mipmap/quarter_1_foreground"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
         <ImageView
             android:id="@+id/iv_quarter_2_foreground"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:alpha="0.4"
             android:src="@mipmap/quarter_2_foreground"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
         <ImageView
             android:id="@+id/iv_quarter_3_foreground"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:alpha="0.4"
             android:src="@mipmap/quarter_3_foreground"
-            android:visibility="invisible"/>
+
+            android:visibility="invisible" />
 
         <ImageView
             android:id="@+id/iv_quarter_4_foreground"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:alpha="0.4"
             android:src="@mipmap/quarter_4_foreground"
-            android:visibility="invisible"/>
+
+            android:visibility="invisible" />
 
         <ImageView
             android:id="@+id/iv_bg_0_black_foreground"
