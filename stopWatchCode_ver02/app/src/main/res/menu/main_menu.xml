@@ -4,11 +4,12 @@
 
     <item
         android:id="@+id/menu_save"
-        android:icon="@drawable/ic_baseline_save_24"
-        android:title="save" />
+        android:icon="@drawable/ic_baseline_save_24_foreground"
+        android:title="Save"
+        />
     <item
         android:id="@+id/menu_rest"
         android:icon="@drawable/ic_baseline_delete"
-        android:title="rest" />
+        android:title="Rest" />
 
 </menu>

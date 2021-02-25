@@ -154,6 +154,10 @@ public class MainActivity extends AppCompatActivity {
             getCircles().stopPointers();
             recordViewModel.deleteAll();
         }
+        else {
+            Toast.makeText(getApplication(), "STOP the time if you wish to Rest data",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

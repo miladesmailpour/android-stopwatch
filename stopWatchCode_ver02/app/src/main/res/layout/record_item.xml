@@ -2,16 +2,23 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginEnd="8dp"
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
-    android:gravity="center">
+    android:gravity="center"
+    app:cardBackgroundColor="@android:color/transparent">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:padding="8dp">
+
+        <ImageView
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:src="@drawable/ic_baseline_timer_foreground" />
 
         <TextView
             android:id="@+id/tv_record"
@@ -19,8 +26,14 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:maxLines="1"
-            android:text="1" />
+            android:text="00:00:00"
+            android:textColor="@android:color/holo_orange_light"
+            android:textStyle="bold" />
+        <ImageView
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:src="@drawable/ic_baseline_timer_foreground" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>
