@@ -68,10 +68,13 @@ public class CircleAnimate {
         setFlag(true);
         i = -1;
         try {
-
+            counter_1 = 0;
             thread.interrupt();
             imageView.clearAnimation();
-
+            for (int i = 0; i < qImageView.length; i++) {
+                qImageView[i].setAlpha(0.6f);
+                qImageView[i].clearAnimation();
+            }
             this.animSet = new AnimationSet(true);
 
         } catch (Exception e) {
