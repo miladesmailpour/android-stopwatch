@@ -31,35 +31,29 @@
             android:id="@+id/iv_quarter_1_foreground"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0.4"
-            android:src="@mipmap/quarter_1_foreground"
-            android:visibility="invisible" />
+            android:alpha="0.6"
+            android:src="@mipmap/quarter_1_foreground"/>
 
         <ImageView
             android:id="@+id/iv_quarter_2_foreground"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0.4"
-            android:src="@mipmap/quarter_2_foreground"
-            android:visibility="invisible" />
+            android:alpha="0.6"
+            android:src="@mipmap/quarter_2_foreground" />
 
         <ImageView
             android:id="@+id/iv_quarter_3_foreground"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0.4"
-            android:src="@mipmap/quarter_3_foreground"
-
-            android:visibility="invisible" />
+            android:alpha="0.6"
+            android:src="@mipmap/quarter_3_foreground"/>
 
         <ImageView
             android:id="@+id/iv_quarter_4_foreground"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0.4"
-            android:src="@mipmap/quarter_4_foreground"
-
-            android:visibility="invisible" />
+            android:alpha="0.6"
+            android:src="@mipmap/quarter_4_foreground" />
 
         <ImageView
             android:id="@+id/iv_bg_0_black_foreground"

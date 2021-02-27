@@ -20,7 +20,7 @@ public class CircleAnimate {
     private final String TAG = "CircleAnimate";
     private AnimationSet animSet;
     private Handler mHandler;
-    private float firstPoint = 0.0f, prvPoint = 0.0f, newPoint = 0.0f, rate = 1.0f;
+    private float firstPoint = 0.0f, prvPoint = 0.0f, newPoint = 0.0f, rate = 6.0f;
     private int i = -1, counter_1 = 0;
     private String str = "";
     private boolean flag = true, sw = true;
@@ -86,7 +86,7 @@ public class CircleAnimate {
 
     private float counter(float currPoint) {
         prvPoint = currPoint;
-        str = Float.toString(prvPoint);
+        //str = Float.toString(prvPoint);
         return currPoint + rate;
     }
 
@@ -109,16 +109,22 @@ public class CircleAnimate {
 
                             @Override
                             public void run() {
-                                animRotate = new RotateAnimation(0.0f, 6.0f,
+                                animRotate = new RotateAnimation(prvPoint, counter(prvPoint),
                                         RotateAnimation.RELATIVE_TO_SELF, 0.5f,
                                         RotateAnimation.RELATIVE_TO_SELF, 0.5f);
-
-
                                 if (scoop == 's') {
                                     setPointerPosition(counter_1++);
                                 }
+
+                                Animation fadeIn = new AlphaAnimation(0, 1);
+
+                                fadeIn.setInterpolator(new DecelerateInterpolator()); //add this
+                                fadeIn.setDuration(1000);
+
+                                animSet.addAnimation(fadeIn);
+
 //                                Log.d("TAG", "run: current thread +++++++++++++++++++++++++++" + " : " + firstPoint + prvPoint + "->" + newPoint);
-                                newPoint = counter(newPoint);
+//                                newPoint = counter(newPoint);
                                 animSet.addAnimation(animRotate);
                                 imageView.startAnimation(animSet);
                             }
@@ -156,6 +162,7 @@ public class CircleAnimate {
         }
         return sleepTime;
     }
+
     private int setPointerPosition(int counter) {
         int q = 0;
         if (counter >= 60) {
@@ -164,51 +171,67 @@ public class CircleAnimate {
             q = counter;
         }
         if (q >= 0 && q < 14) {
-            qImageView[0].setVisibility(View.INVISIBLE);
-            qImageView[1].setVisibility(View.VISIBLE);
-            qImageView[2].setVisibility(View.VISIBLE);
-            qImageView[3].setVisibility(View.VISIBLE);
-
-//            Animation fadeIn = new AlphaAnimation(0, 1);
-//
-//            fadeIn.setInterpolator(new DecelerateInterpolator()); //add this
-//            fadeIn.setDuration(15000);
-//
-////            Animation fadeOut = new AlphaAnimation(1, 0);
-////            fadeOut.setInterpolator(new AccelerateInterpolator()); //and this
-////            fadeOut.setStartOffset(15000);
-////            fadeOut.setDuration(15000);
-//
-//            AnimationSet animation = new AnimationSet(false); //change to false
-//            animation.addAnimation(fadeIn);
-//            animation.addAnimation(fadeOut);
-
-//            qImageView[0].setAnimation(animation);
-//            qImageView[1].setAnimation(animation);
-//            qImageView[2].setAnimation(animation);
-//            qImageView[3].setAnimation(animation);
+            fadeInOut(1, false, q);
             return 1;
         } else if (q >= 14 && q < 29) {
-            qImageView[0].setVisibility(View.VISIBLE);
-            qImageView[1].setVisibility(View.INVISIBLE);
-            qImageView[2].setVisibility(View.VISIBLE);
-            qImageView[3].setVisibility(View.VISIBLE);
+            fadeInOut(2, false, q);
             return 2;
         } else if (q >= 29 && q < 44) {
-            qImageView[0].setVisibility(View.VISIBLE);
-            qImageView[1].setVisibility(View.VISIBLE);
-            qImageView[2].setVisibility(View.INVISIBLE);
-            qImageView[3].setVisibility(View.VISIBLE);
+            fadeInOut(3, false, q);
             return 3;
         } else if (q >= 44 && q < 60) {
-            qImageView[0].setVisibility(View.VISIBLE);
-            qImageView[1].setVisibility(View.VISIBLE);
-            qImageView[2].setVisibility(View.VISIBLE);
-            qImageView[3].setVisibility(View.INVISIBLE);
+            fadeInOut(4, true, q);
             return 4;
         }
         return 0;
     }
 
+    private boolean fadeInOut(int quarter, boolean in_Out, int second) {
+        Animation fadeIn = new AlphaAnimation(0, 0.6f);
+        fadeIn.setInterpolator(new DecelerateInterpolator());
+        fadeIn.setDuration(2000);
 
+        Animation fadeInOut = new AlphaAnimation(0, 0.6f);
+        fadeInOut.setInterpolator(new DecelerateInterpolator());
+        fadeInOut.setDuration(1000);
+
+        switch (quarter) {
+            case 1:
+                qImageView[0].setAnimation(fadeInOut);
+                if (second == 0) {
+                    for (int i = 0; i <= 3; i++) {
+                        qImageView[i].setAlpha(0.6f);
+                    }
+                }
+                break;
+            case 2:
+                qImageView[1].setAnimation(fadeInOut);
+                qImageView[0].setAlpha(0.0f);
+
+                break;
+            case 3:
+                qImageView[2].setAnimation(fadeInOut);
+                qImageView[1].setAlpha(0.0f);
+
+                break;
+            case 4:
+                if (second == 45) {
+                    for (int i = 0; i <= 2; i++) {
+                        qImageView[i].setAlpha(0.0f);
+                    }
+                }
+                if (second == 59) {
+                    for (int i = 0; i <= 3; i++) {
+                        qImageView[i].setAnimation(fadeIn);
+                    }
+                }
+                if ((second < 58)) {
+                    qImageView[3].setAnimation(fadeInOut);
+                }
+                break;
+            default:
+                return false;
+        }
+        return false;
+    }
 }
