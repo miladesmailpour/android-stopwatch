@@ -45,6 +45,13 @@ public class Btns extends Fragment {
         btnStop = view.findViewById(R.id.btnStop);
         btnSave = view.findViewById(R.id.btnSave);
 
+
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,7 +84,6 @@ public class Btns extends Fragment {
                 }
             }
         });
-        return view;
     }
 
     public void setBtn() {

@@ -2,6 +2,7 @@ package ca.i3th.stopwatchcode_ver02.Fragments;
 
 import android.os.Bundle;
 
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
@@ -49,12 +50,15 @@ public class Circles extends Fragment {
         View view = inflater.inflate(R.layout.fragment_circles, container, false);
 
         this.chronometer = view.findViewById(R.id.chronometer_main);
-
+        this.chronometer.setTypeface(ResourcesCompat.getFont(getContext(), R.font.digital_7));
         ivQ1 = (ImageView) view.findViewById(R.id.iv_quarter_1_foreground);
         ivQ2 = (ImageView) view.findViewById(R.id.iv_quarter_2_foreground);
         ivQ3 = (ImageView) view.findViewById(R.id.iv_quarter_3_foreground);
         ivQ4 = (ImageView) view.findViewById(R.id.iv_quarter_4_foreground);
         qList = new ImageView[]{ivQ1, ivQ2, ivQ3, ivQ4};
+//        for (int i = 0; i < qList.length; i++) {
+//            qList[i].setAlpha(0.0f);
+//        }
         ivSecond = (ImageView) view.findViewById(R.id.iv_pointer_second_foreground);
         ivMinute = (ImageView) view.findViewById(R.id.iv_pointer_minute_foreground);
         ivHour = (ImageView) view.findViewById(R.id.iv_pointer_hour_foreground);
@@ -67,6 +71,10 @@ public class Circles extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 
     public void runPointers() {
 

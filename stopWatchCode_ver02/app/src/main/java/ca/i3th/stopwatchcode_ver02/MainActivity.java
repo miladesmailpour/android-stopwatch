@@ -3,6 +3,7 @@ package ca.i3th.stopwatchcode_ver02;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
@@ -13,6 +14,7 @@ import android.app.Application;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -50,25 +52,18 @@ public class MainActivity extends AppCompatActivity {
     private FrameLayout fl_mainContainer_middle;
     private Application app;
     private RecordViewModel recordViewModel;
+    private Bundle bundle;
 
-//    private RecordViewModel recordViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        bundle = savedInstanceState;
         setContentView(R.layout.activity_main);
         FragmentManager fragmentManager = getSupportFragmentManager();
         String h = "";
         app = this.getApplication();
-//        recordViewModel = new ViewModelProvider(this, ViewModelProvider
-//                .AndroidViewModelFactory.getInstance(this.getApplication()))
-//                .get(RecordViewModel.class);
-//        recordViewModel.getAllRecord().observe(this, new Observer<List<Record>>() {
-//            @Override
-//            public void onChanged(List<Record> records) {
-//                Toast.makeText(MainActivity.this, "onChange", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+
 
         circles = new Circles();
         btns = new Btns();
@@ -81,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                     .setReorderingAllowed(true)
                     .commit();
         }
-
+        Log.d(TAG, "onCreate: +++++++++++++++++++++++++++++++++++++++>");
         fl_mainContainer_middle = findViewById(R.id.mainContainer_middle);
 
 //        screenInfo = new ScreenInfo(new DisplayMetrics(), this);
@@ -90,11 +85,64 @@ public class MainActivity extends AppCompatActivity {
 //                + " : " + screenInfo.screenLayout() + " : " + screenInfo.density()
 //                + " : " + screenInfo.sizePicker());
 
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(TAG, "onRestart: +++++++++++++++++++++++++++++++++++++++>");
+//        setContentView(R.layout.activity_main);
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        String h = "";
+//        app = this.getApplication();
+//
+//
+//        circles = new Circles();
+//        btns = new Btns();
+//        lap = new Lap();
+//        if (bundle == null) {
+//            fragmentManager.beginTransaction()
+//                    .add(R.id.mainContainer_top, lap)
+//                    .add(R.id.mainContainer_middle, circles)
+//                    .add(R.id.mainContainer_bottom, btns)
+//                    .setReorderingAllowed(true)
+//                    .commit();
+//        }
+//        Log.d(TAG, "onCreate: +++++++++++++++++++++++++++++++++++++++>");
+//        fl_mainContainer_middle = findViewById(R.id.mainContainer_middle);
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart: +++++++++++++++++++++++++++++++++++++++>");
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop: +++++++++++++++++++++++++++++++++++++++>");
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy: +++++++++++++++++++++++++++++++++++++++>");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause: +++++++++++++++++++++++++++++++++++++++>");
 
     }
 
     @Override
     protected void onResume() {
+        Log.d(TAG, "onResume: +++++++++++++++++++++++++++++++++++++++>");
         super.onResume();
         chronometer = circles.getChronometer();
         handler = new Handler();
@@ -136,18 +184,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onKeyUp(keyCode, event);
     }
 
-    public void openDialog(String list) {
-        RecordList rl = new RecordList();
-        rl.show(getSupportFragmentManager(), "RecordList");
-    }
-
-    private void saveRecord() {
-        String flag = getStopwatch().currentRecord();
-        if (!flag.equals("-1")) {
-            getRecordViewModel().insert(new Record(flag));
-
-        }
-    }
     private void restRecords() {
         if (!getStopwatch().getIsActive()) {
             getStopwatch().stopTime();
@@ -155,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
             recordViewModel.deleteAll();
         }
         else {
-            Toast.makeText(getApplication(), "STOP the time if you wish to Rest data",
+            Toast.makeText(MainActivity.this, "STOP the time if you wish to Rest data",
                     Toast.LENGTH_SHORT).show();
         }
     }
@@ -170,9 +206,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_save:
-                saveRecord();
-                return true;
             case R.id.menu_rest:
                 restRecords();
                 return true;

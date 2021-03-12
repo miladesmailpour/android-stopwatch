@@ -122,7 +122,7 @@ public class CircleAnimate {
                                 Animation fadeIn = new AlphaAnimation(0, 1);
 
                                 fadeIn.setInterpolator(new DecelerateInterpolator()); //add this
-                                fadeIn.setDuration(1000);
+                                fadeIn.setDuration(20);
 
                                 animSet.addAnimation(fadeIn);
 

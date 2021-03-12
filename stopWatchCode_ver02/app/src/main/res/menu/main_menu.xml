@@ -3,13 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_save"
-        android:icon="@drawable/ic_baseline_save_24_foreground"
-        android:title="Save"
-        />
-    <item
         android:id="@+id/menu_rest"
         android:icon="@drawable/ic_baseline_delete"
-        android:title="Rest" />
+        android:title="Rest"
+        app:showAsAction="ifRoom"/>
 
 </menu>
